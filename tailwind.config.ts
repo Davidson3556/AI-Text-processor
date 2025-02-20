@@ -17,6 +17,9 @@ module.exports = {
 	  },
 	  extend: {
 		colors: {
+		 backgroundImage: {
+        'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',
+      },	
 		  border: "hsl(var(--border))",
 		  input: "hsl(var(--input))",
 		  ring: "hsl(var(--ring))",

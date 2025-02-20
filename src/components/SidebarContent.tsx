@@ -18,8 +18,7 @@ import {
 const menuItems = [
   { label: "Home", icon: <HomeIcon className="h-5 w-5" />, href: "/" },
   { label: "About Project", icon: <LanguagesIcon className="h-5 w-5" />, href: "/about" },
-  { label: "Github Repo", icon: <ScrollTextIcon className="h-5 w-5" />, href: "https://github.com/your-repo" },
-  { label: "Chat History", icon: <SparklesIcon className="h-5 w-5" />, href: "/history" },
+  { label: "Github Repo", icon: <ScrollTextIcon className="h-5 w-5" />, href: "https://github.com/Davidson3556/AI-Text-processor" },
 ];
 
 const SidebarContent = () => {

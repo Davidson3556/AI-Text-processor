@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   title: "DPT - AI Text processor",
   description: "Quickly summarize, translate, and identify the language of any text with this application.",
   authors: [{ name: "Davidson", url: "https://github.com/Davidson3556" }],
+  icons:{
+    icon: "/"
+  }
   
 };
 
@@ -57,7 +60,7 @@ export default function RootLayout({
             <SidebarContent />
             <div className="flex-1 flex flex-col">
               <Navbar />
-              <main className="flex-1 p-6 pt-24 md:pt-20 overflow-hidden">
+              <main className="flex-1 p-6 pt-24 md:pt-20 overflow-auto">
                 {children}
               </main>
             </div>
