@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const dotTransition = {
+const tweenTransition = {
+  type: "tween",
   duration: 0.6,
-  repeat: Infinity,
   ease: "easeInOut",
+  repeat: Infinity,
 };
 
 interface ChatLoaderProps {
@@ -19,26 +20,26 @@ const ChatLoader: React.FC<ChatLoaderProps> = ({ user }) => {
       <motion.span
         className={cn(
           "h-2 w-2 rounded-full",
-          user ? "bg-zinc-100" : "bg-zinc-500",
+          user ? "bg-zinc-100" : "bg-zinc-500"
         )}
-        animate={{ y: [0, -5, 0] }}
-        transition={{ ...dotTransition, delay: 0 }}
+        animate={{ scale: [1, 1.3, 1] }}
+        transition={{ ...tweenTransition, delay: 0 }}
       />
       <motion.span
         className={cn(
           "h-2 w-2 rounded-full",
-          user ? "bg-zinc-300" : "bg-zinc-700",
+          user ? "bg-zinc-300" : "bg-zinc-700"
         )}
-        animate={{ y: [0, -5, 0] }}
-        transition={{ ...dotTransition, delay: 0.2 }}
+        animate={{ scale: [1, 1.3, 1] }}
+        transition={{ ...tweenTransition, delay: 0.2 }}
       />
       <motion.span
         className={cn(
           "h-2 w-2 rounded-full",
-          user ? "bg-white" : "bg-foreground",
+          user ? "bg-white" : "bg-foreground"
         )}
-        animate={{ y: [0, -5, 0] }}
-        transition={{ ...dotTransition, delay: 0.4 }}
+        animate={{ scale: [1, 1.3, 1] }}
+        transition={{ ...tweenTransition, delay: 0.4 }}
       />
     </span>
   );

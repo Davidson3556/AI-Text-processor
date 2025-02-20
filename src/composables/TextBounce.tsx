@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getLanguageName } from "@/utils/langName";
 import { formatTime } from "@/utils/timeFormat";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface TextBounceProps {
   children: React.ReactNode;
@@ -26,15 +27,29 @@ const TextBounce: React.FC<TextBounceProps> = ({
       )}
     >
       <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>T</AvatarFallback>
+        <AvatarImage src="https://res.cloudinary.com/olawale/image/upload/v1740060048/avatar_ub4tnx.svg" />
+        <AvatarFallback>D</AvatarFallback>
       </Avatar>
 
-      <p
+      <motion.div
         className={cn(
           "flex flex-col gap-1 rounded-2xl border bg-white p-3",
-          right && "border-accent bg-primary-200 pr-3 text-white",
+          right && "border-accent bg-[#F4F4F4] pr-3 text-[black]",
         )}
+        initial={{ boxShadow: "0 0 0px rgba(99, 102, 241, 0)" }}
+        animate={{ 
+          boxShadow: [
+            "0 0 0px rgba(99, 102, 241, 0)",
+            "0 0 15px rgba(99, 102, 241, 0.3)",
+            "0 0 0px rgba(99, 102, 241, 0)"
+          ]
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          repeatType: "loop",
+          ease: "easeInOut"
+        }}
       >
         {children}
 
@@ -53,7 +68,7 @@ const TextBounce: React.FC<TextBounceProps> = ({
             )}
           ></span>
         </span>
-      </p>
+      </motion.div>
 
       {/* Display the detected language */}
       {detectedLanguage && (

@@ -74,3 +74,6 @@
     @apply bg-background text-foreground;
   }
 }
+:root {
+  --radius: 0.5rem;
+}

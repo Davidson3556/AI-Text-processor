@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
-import  Navbar  from "@/components/Navbar";
+import { Navbar } from "@/components/Navbar";
 import  SidebarContent  from "@/components/SidebarContent";
 import { SidebarProvider } from "@/composables/sidebar";
 
 
 
 import "./globals.css";
+import { HomeIcon } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,18 +51,16 @@ export default function RootLayout({
           content={process.env.NEXT_PUBLIC_SUMMARIZER_API_TRIAL_TOKEN}
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-         <SidebarProvider>
-          <div className="flex flex-col md:flex-row min-h-screen">
-          <aside className="w-full md:w-20">
-              {/* <SidebarContent /> */}
-            </aside>
-            <main className="flex-1">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <SidebarProvider>
+          <div className="flex min-h-screen">
+            <SidebarContent />
+            <div className="flex-1">
               <Navbar />
-              <div className="mt-16">{children}</div>
-            </main>
+              <main className="p-6 pt-24 md:pt-20 transition-all duration-300 ease-in-out">
+                {children}
+              </main>
+            </div>
           </div>
           <Toaster />
         </SidebarProvider>

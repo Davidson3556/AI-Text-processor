@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { SendHorizontal } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -125,7 +124,7 @@ function ChatBox() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full rounded-3xl border border-t-0 border-border bg-white shadow-custom"
+        className="w-full rounded-3xl  border-t-0  bg-[#F4F4F4] shadow-custom"
       >
         {/* Chat Box */}
         <FormField
@@ -171,24 +170,24 @@ function ChatBox() {
         <div className="flex w-full items-start justify-between gap-4 px-4 py-3 max-md:flex-col">
           {/* Summarize button */}
           <div className="flex w-full flex-col justify-end">
-            <Button
-              type="button"
-              disabled={isSubmitting || !tooLong || notEnglish}
-              onClick={() => {
-                actionRef.current = "summarize";
-                form.handleSubmit(onSubmit)();
-              }}
-              className={cn(
-                "w-full bg-gradient-to-r from-purple-500 via-primary-100 to-primary-300 font-bold transition-all duration-300 md:w-fit",
-                tooLong ? "animate-gradient" : "bg-clip-text text-transparent",
-              )}
-            >
-              Summarize ✨
-            </Button>
+          <Button
+  type="button"
+  disabled={isSubmitting || !tooLong || notEnglish}
+  onClick={() => {
+    actionRef.current = "summarize";
+    form.handleSubmit(onSubmit)();
+  }}
+  className={cn(
+    "w-full bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 font-bold transition-all duration-300 md:w-fit",
+    tooLong ? "animate-gradient" : "bg-clip-text text-transparent"
+  )}
+>
+  Summarize ✨
+</Button>
 
             {notEnglish && tooLong && (
               <FormMessage className="h-fit px-2 pt-3 max-md:col-span-2 max-md:text-center">
-                To Summarize, text must be in English
+                Only English text can be summarized.
               </FormMessage>
             )}
           </div>
