@@ -77,3 +77,33 @@
 :root {
   --radius: 0.5rem;
 }
+html, body, #__next {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.shadow-custom {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.animate-gradient {
+  background-size: 300% 300%;
+  animation: gradient 4s ease infinite;
+}
+
+.shadow-custom {
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.content-grid {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: calc(100vh - 5rem); /* Adjust based on navbar height */
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

@@ -121,11 +121,12 @@ function ChatBox() {
   }
 
   return (
+    <div className="sticky bottom-0 left-0 right-0 bg-[#F4F4F4] pt-4">
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full rounded-3xl  border-t-0  bg-[#F4F4F4] shadow-custom"
-      >
+        className="w-full h-full  rounded-3xl border-t-0 bg-[#F4F4F4] shadow-custom"
+              >
         {/* Chat Box */}
         <FormField
           control={form.control}
@@ -238,6 +239,7 @@ function ChatBox() {
         </div>
       </form>
     </Form>
+    </div>
   );
 }
 

@@ -15,25 +15,29 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
   return (
-    
-    <div className=" content-end ">
-    <AnimatePresence mode="wait">
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <ChatSource>
-            <ChatSidebar />
-            <ChatCard />
-          </ChatSource>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  </div>
+    <div className="h-full">
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="h-full"
+          >
+            <ChatSource>
+              <div className="grid grid-rows-[1fr_auto] min-h-[calc(100vh-5rem)]"> {/* Adjust 5rem to match navbar height */}
+                <ChatSidebar />
+                <div className="sticky bottom-0">
+                  <ChatCard />
+                </div>
+              </div>
+            </ChatSource>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

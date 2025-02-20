@@ -53,11 +53,11 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SidebarProvider>
-          <div className="flex min-h-screen">
+          <div className="flex h-full">
             <SidebarContent />
-            <div className="flex-1">
+            <div className="flex-1 flex flex-col">
               <Navbar />
-              <main className="p-6 pt-24 md:pt-20 transition-all duration-300 ease-in-out">
+              <main className="flex-1 p-6 pt-24 md:pt-20 overflow-hidden">
                 {children}
               </main>
             </div>
