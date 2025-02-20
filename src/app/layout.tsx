@@ -24,9 +24,11 @@ export const metadata: Metadata = {
   title: "DPT - AI Text processor",
   description: "Quickly summarize, translate, and identify the language of any text with this application.",
   authors: [{ name: "Davidson", url: "https://github.com/Davidson3556" }],
-  icons:{
-    icon: "/"
-  }
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
   
 };
 
@@ -36,8 +38,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-       <head>
+<html lang="en" className="h-full" suppressHydrationWarning>
+         <head>
         <meta
           name="translator-api-trial-token"
           httpEquiv="origin-trial"
