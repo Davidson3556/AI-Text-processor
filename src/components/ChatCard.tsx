@@ -146,7 +146,7 @@ function ChatBox() {
                 <FormControl>
                   <div className="relative">
                     <Textarea
-                      placeholder="What do you want to do?"
+                      placeholder="Type your text here and see the magic"
                       className="resize-none bg-background pr-12"
                       {...field}
                       onKeyDown={(e) => {
