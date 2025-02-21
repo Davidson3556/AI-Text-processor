@@ -24,7 +24,7 @@ export default function About() {
             DPT is an AI-powered text processing platform that helps you
             transform and analyze text content effortlessly. Built with
             cutting-edge language models, it enables quick summarization,
-            translation, and language detection.
+            translation, and language detection. 
           </p>
         </section>
 
@@ -58,7 +58,7 @@ export default function About() {
           </h2>
           <p className="text-muted-foreground">
             DPT is a stage 3 project made by Davidson in HNG and it is opened
-            for contribution!
+            for contribution! N:B Make sure you are using a supported version of Chrome with experimental AI APIs enabled.
           </p>
           <Link
             href="https://github.com/Davidson3556/AI-Text-processor"
