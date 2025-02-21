@@ -30,7 +30,6 @@ import { useLanguageDetection } from "@/lib/useLanguagedetector";
 import { type FormData, FormSchema } from "@/utils/chatbox";
 import { languages } from "@/constants/allLanguage";
 import { cn } from "@/lib/utils";
-// import { toast } from "@/hooks/use-toast";
 
 function ChatBox() {
   // To hold the desired action ("translate" or "summarize")
@@ -55,38 +54,7 @@ function ChatBox() {
   const chatValue = watch("chat");
   const tooLong = chatValue.length > 150;
 
-  // Watch chat value and detect language
-  // useEffect(() => {
-  //   const detectChatLanguage = async () => {
-  //     if (chatValue.trim().length > 0) {
-  //       try {
-  //         const detected = await detectLanguage(chatValue);
-  //         setDetectedLanguage(detected || "");
-  //       } catch (error) {
-  //         const errorMessage =
-  //           error instanceof Error
-  //             ? error.message
-  //             : "An unexpected error occurred";
-
-  //         toast({
-  //           title: "Language detection failed",
-  //           description: errorMessage,
-  //           variant: "destructive",
-  //         });
-  //         setDetectedLanguage("");
-  //       }
-  //     } else {
-  //       setDetectedLanguage("");
-  //     }
-  //   };
-
-  //   // Debounce the detection to avoid too many API calls
-  //   const timer = setTimeout(() => {
-  //     detectChatLanguage();
-  //   }, 500);
-
-  //   return () => clearTimeout(timer);
-  // }, [chatValue, detectLanguage]);
+ 
   useEffect(() => {
     const detectChatLanguage = async () => {
       if (chatValue.trim().length > 0) {
