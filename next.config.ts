@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   // Optional: For production deployment
-  output: 'standalone', // or 'export' for static sites
+  output: "standalone", // or 'export' for static sites
 };
 
 export default nextConfig;

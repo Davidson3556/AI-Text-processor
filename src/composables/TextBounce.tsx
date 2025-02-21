@@ -37,18 +37,18 @@ const TextBounce: React.FC<TextBounceProps> = ({
           right && "border-accent bg-sidebar pr-3 ",
         )}
         initial={{ boxShadow: "0 0 0px rgba(99, 102, 241, 0)" }}
-        animate={{ 
+        animate={{
           boxShadow: [
             "0 0 0px rgba(99, 102, 241, 0)",
             "0 0 15px rgba(99, 102, 241, 0.3)",
-            "0 0 0px rgba(99, 102, 241, 0)"
-          ]
+            "0 0 0px rgba(99, 102, 241, 0)",
+          ],
         }}
         transition={{
           duration: 2,
           repeat: Infinity,
           repeatType: "loop",
-          ease: "easeInOut"
+          ease: "easeInOut",
         }}
       >
         {children}

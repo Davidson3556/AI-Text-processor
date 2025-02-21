@@ -21,10 +21,10 @@ export default function About() {
             Project Overview
           </h2>
           <p className="text-muted-foreground leading-relaxed">
-            DPT  is an AI-powered text processing platform 
-            that helps you transform and analyze text content effortlessly. Built with 
-            cutting-edge language models, it enables quick summarization, translation, 
-            and language detection.
+            DPT is an AI-powered text processing platform that helps you
+            transform and analyze text content effortlessly. Built with
+            cutting-edge language models, it enables quick summarization,
+            translation, and language detection.
           </p>
         </section>
 
@@ -39,9 +39,11 @@ export default function About() {
               "Text Summarization",
               "Language Detection",
               "Real-time Processing",
-             
             ].map((feature) => (
-              <li key={feature} className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
+              <li
+                key={feature}
+                className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg"
+              >
                 <Code2 className="h-4 w-4 text-green-500" />
                 {feature}
               </li>
@@ -55,7 +57,8 @@ export default function About() {
             Open Source
           </h2>
           <p className="text-muted-foreground">
-            DPT is a stage 3 project made by Davidson in HNG and it is opened for contribution!
+            DPT is a stage 3 project made by Davidson in HNG and it is opened
+            for contribution!
           </p>
           <Link
             href="https://github.com/Davidson3556/AI-Text-processor"

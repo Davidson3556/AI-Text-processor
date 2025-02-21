@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "@/components/Navbar";
-import  SidebarContent  from "@/components/SidebarContent";
+import SidebarContent from "@/components/SidebarContent";
 import { SidebarProvider } from "@/composables/sidebar";
 import { ThemeProvider } from "next-themes";
-
 
 import "./globals.css";
 
@@ -21,14 +20,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "DPT - AI Text processor",
-  description: "Quickly summarize, translate, and identify the language of any text with this application.",
+  description:
+    "Quickly summarize, translate, and identify the language of any text with this application.",
   authors: [{ name: "Davidson", url: "https://github.com/Davidson3556" }],
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-  
 };
 
 export default function RootLayout({
@@ -37,8 +36,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-<html lang="en" className="h-full" suppressHydrationWarning>
-         <head>
+    <html lang="en" className="h-full" suppressHydrationWarning>
+      <head>
         <meta
           name="translator-api-trial-token"
           httpEquiv="origin-trial"
@@ -55,23 +54,24 @@ export default function RootLayout({
           content={process.env.NEXT_PUBLIC_SUMMARIZER_API_TRIAL_TOKEN}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <SidebarProvider>
-          <div className="flex h-full">
-            <SidebarContent />
-            <div className="flex-1 flex flex-col">
-              <Navbar />
-              <main className="flex-1 p-6 pt-24 md:pt-20 overflow-auto">
-                {children}
-              </main>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <SidebarProvider>
+            <div className="flex h-full">
+              <SidebarContent />
+              <div className="flex-1 flex flex-col">
+                <Navbar />
+                <main className="flex-1 p-6 pt-24 md:pt-20 overflow-auto">
+                  {children}
+                </main>
+              </div>
             </div>
-          </div>
-          <Toaster />
-        </SidebarProvider>
+            <Toaster />
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>
   );
 }
-

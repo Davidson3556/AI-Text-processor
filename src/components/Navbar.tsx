@@ -23,7 +23,7 @@ export const Navbar = () => {
           </Button>
           <h1 className="text-lg font-semibold">AI Text Processor</h1>
         </div>
-        
+
         <Button
           variant="ghost"
           size="icon"

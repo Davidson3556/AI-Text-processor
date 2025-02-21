@@ -12,13 +12,21 @@ import {
   LanguagesIcon,
   ScrollTextIcon,
   SparklesIcon,
-  XIcon
+  XIcon,
 } from "lucide-react";
 
 const menuItems = [
   { label: "Home", icon: <HomeIcon className="h-5 w-5" />, href: "/" },
-  { label: "About Project", icon: <LanguagesIcon className="h-5 w-5" />, href: "/about" },
-  { label: "Github Repo", icon: <ScrollTextIcon className="h-5 w-5" />, href: "https://github.com/Davidson3556/AI-Text-processor" },
+  {
+    label: "About Project",
+    icon: <LanguagesIcon className="h-5 w-5" />,
+    href: "/about",
+  },
+  {
+    label: "Github Repo",
+    icon: <ScrollTextIcon className="h-5 w-5" />,
+    href: "https://github.com/Davidson3556/AI-Text-processor",
+  },
 ];
 
 const SidebarContent = () => {
@@ -36,7 +44,7 @@ const SidebarContent = () => {
           className={cn(
             "fixed md:relative h-screen bg-sidebar border-r z-50", // Changed to h-screen
             "w-64 px-4 py-6",
-            "md:translate-x-0 md:shadow-none"
+            "md:translate-x-0 md:shadow-none",
           )}
         >
           {/* Close button for mobile */}
@@ -88,7 +96,11 @@ const SidebarContent = () => {
   );
 };
 
-const SidebarItem = ({ icon, label, href }: { 
+const SidebarItem = ({
+  icon,
+  label,
+  href,
+}: {
   icon: React.ReactNode;
   label: string;
   href: string;
@@ -109,7 +121,7 @@ const SidebarItem = ({ icon, label, href }: {
         className={cn(
           "w-full justify-start gap-3 rounded-lg px-3 py-2 text-sm",
           "transition-colors hover:bg-accent",
-          isFocused && "bg-accent/50"
+          isFocused && "bg-accent/50",
         )}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}

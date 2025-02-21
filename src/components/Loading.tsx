@@ -2,11 +2,10 @@
 import { motion } from "framer-motion";
 
 export const LogoIcon = ({ className }: { className?: string }) => (
-    <img
+  <img
     src="https://res.cloudinary.com/olawale/image/upload/v1740072561/DPT_df67ex.png"
     alt="Logo"
     className={`${className} rounded-full`}
-
   />
 );
 

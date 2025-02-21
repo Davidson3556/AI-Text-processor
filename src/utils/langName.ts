@@ -5,15 +5,14 @@
  */
 
 export function getLanguageName(code: string): string {
-    const languageMap: Record<string, string> = {
-      en: "English",
-      fr: "French",
-      es: "Spanish",
-      pt: "Portuguese",
-      ru: "Russian",
-      tr: "Turkish",
-    };
-  
-    return languageMap[code] ?? "Unknown";
-  }
-  
+  const languageMap: Record<string, string> = {
+    en: "English",
+    fr: "French",
+    es: "Spanish",
+    pt: "Portuguese",
+    ru: "Russian",
+    tr: "Turkish",
+  };
+
+  return languageMap[code] ?? "Unknown";
+}

@@ -20,7 +20,7 @@ const ChatLoader: React.FC<ChatLoaderProps> = ({ user }) => {
       <motion.span
         className={cn(
           "h-2 w-2 rounded-full",
-          user ? "bg-zinc-100" : "bg-zinc-500"
+          user ? "bg-zinc-100" : "bg-zinc-500",
         )}
         animate={{ scale: [1, 1.3, 1] }}
         transition={{ ...tweenTransition, delay: 0 }}
@@ -28,7 +28,7 @@ const ChatLoader: React.FC<ChatLoaderProps> = ({ user }) => {
       <motion.span
         className={cn(
           "h-2 w-2 rounded-full",
-          user ? "bg-zinc-300" : "bg-zinc-700"
+          user ? "bg-zinc-300" : "bg-zinc-700",
         )}
         animate={{ scale: [1, 1.3, 1] }}
         transition={{ ...tweenTransition, delay: 0.2 }}
@@ -36,7 +36,7 @@ const ChatLoader: React.FC<ChatLoaderProps> = ({ user }) => {
       <motion.span
         className={cn(
           "h-2 w-2 rounded-full",
-          user ? "bg-white" : "bg-foreground"
+          user ? "bg-white" : "bg-foreground",
         )}
         animate={{ scale: [1, 1.3, 1] }}
         transition={{ ...tweenTransition, delay: 0.4 }}

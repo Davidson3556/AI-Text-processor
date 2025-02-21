@@ -54,7 +54,6 @@ function ChatBox() {
   const chatValue = watch("chat");
   const tooLong = chatValue.length > 150;
 
- 
   useEffect(() => {
     const detectChatLanguage = async () => {
       if (chatValue.trim().length > 0) {
@@ -90,123 +89,125 @@ function ChatBox() {
 
   return (
     <div className="sticky bottom-0 left-0 right-0  pt-4">
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full h-full  rounded-2xl border-t-0 bg-sidebar shadow-custom"
-              >
-        {/* Chat Box */}
-        <FormField
-          control={form.control}
-          name="chat"
-          render={({ field, fieldState }) => (
-            <FormItem className="space-y-0">
-              <FormControl>
-                <Textarea
-                  placeholder="Type your text here and see the magic"
-                  className="resize-none"
-                  {...field}
-                  onKeyDown={(e) => {
-                    if (
-                      window.innerWidth >= 640 &&
-                      e.key === "Enter" &&
-                      !e.shiftKey
-                    ) {
-                      e.preventDefault();
-                      form.handleSubmit(onSubmit)();
-                    }
-                  }}
-                />
-              </FormControl>
-
-              <AnimatePresence mode="wait">
-                {form.formState.isSubmitted && fieldState.error && (
-                  <motion.div
-                    key={fieldState.error.message}
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <FormMessage className="px-6 pt-3" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </FormItem>
-          )}
-        />
-
-        <div className="flex w-full items-start justify-between gap-4 px-4 py-3 max-md:flex-col">
-          {/* Summarize button */}
-          <div className="flex w-full flex-col justify-end">
-          <Button
-  type="button"
-  disabled={isSubmitting || !tooLong || notEnglish}
-  onClick={() => {
-    actionRef.current = "summarize";
-    form.handleSubmit(onSubmit)();
-  }}
-  className={cn(
-    "w-full bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 font-bold transition-all duration-300 md:w-fit",
-    tooLong ? "animate-gradient" : "bg-clip-text text-transparent"
-  )}
->
-  Summarize ✨
-</Button>
-
-            {notEnglish && tooLong && (
-              <FormMessage className="h-fit px-2 pt-3 max-md:col-span-2 max-md:text-center">
-                Only English text can be summarized.
-              </FormMessage>
-            )}
-          </div>
-
-          {/* Translation language options */}
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full h-full  rounded-2xl border-t-0 bg-sidebar shadow-custom"
+        >
+          {/* Chat Box */}
           <FormField
             control={form.control}
-            name="language"
-            render={({ field }) => (
-              <FormItem className="flex items-center gap-2 space-y-0 max-md:w-full md:ml-auto">
-                <FormLabel>Select</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  value={field.value}
-                  disabled={isSubmitting}
-                >
-                  <FormControl>
-                    <SelectTrigger className="md:w-[180px]">
-                      <SelectValue placeholder="English (en)" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent side="top">
-                    {languages.map((language) => (
-                      <SelectItem key={language.value} value={language.value}>
-                        {language.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
+            name="chat"
+            render={({ field, fieldState }) => (
+              <FormItem className="space-y-0">
+                <FormControl>
+                  <Textarea
+                    placeholder="Type your text here and see the magic"
+                    className="resize-none"
+                    {...field}
+                    onKeyDown={(e) => {
+                      if (
+                        window.innerWidth >= 640 &&
+                        e.key === "Enter" &&
+                        !e.shiftKey
+                      ) {
+                        e.preventDefault();
+                        form.handleSubmit(onSubmit)();
+                      }
+                    }}
+                  />
+                </FormControl>
+
+                <AnimatePresence mode="wait">
+                  {form.formState.isSubmitted && fieldState.error && (
+                    <motion.div
+                      key={fieldState.error.message}
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <FormMessage className="px-6 pt-3" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </FormItem>
             )}
           />
 
-          {/* Translate button */}
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="max-md:w-full"
-            onClick={() => {
-              actionRef.current = "translate";
-            }}
-          >
-            Translate
-            <SendHorizontal />
-          </Button>
-        </div>
-      </form>
-    </Form>
+          <div className="flex w-full items-start justify-between gap-4 px-4 py-3 max-md:flex-col">
+            {/* Summarize button */}
+            <div className="flex w-full flex-col justify-end">
+              <Button
+                type="button"
+                disabled={isSubmitting || !tooLong || notEnglish}
+                onClick={() => {
+                  actionRef.current = "summarize";
+                  form.handleSubmit(onSubmit)();
+                }}
+                className={cn(
+                  "w-full bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 font-bold transition-all duration-300 md:w-fit",
+                  tooLong
+                    ? "animate-gradient"
+                    : "bg-clip-text text-transparent",
+                )}
+              >
+                Summarize ✨
+              </Button>
+
+              {notEnglish && tooLong && (
+                <FormMessage className="h-fit px-2 pt-3 max-md:col-span-2 max-md:text-center">
+                  Only English text can be summarized.
+                </FormMessage>
+              )}
+            </div>
+
+            {/* Translation language options */}
+            <FormField
+              control={form.control}
+              name="language"
+              render={({ field }) => (
+                <FormItem className="flex items-center gap-2 space-y-0 max-md:w-full md:ml-auto">
+                  <FormLabel>Select</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    value={field.value}
+                    disabled={isSubmitting}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="md:w-[180px]">
+                        <SelectValue placeholder="English (en)" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent side="top">
+                      {languages.map((language) => (
+                        <SelectItem key={language.value} value={language.value}>
+                          {language.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Translate button */}
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="max-md:w-full"
+              onClick={() => {
+                actionRef.current = "translate";
+              }}
+            >
+              Translate
+              <SendHorizontal />
+            </Button>
+          </div>
+        </form>
+      </Form>
     </div>
   );
 }

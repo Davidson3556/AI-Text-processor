@@ -1,11 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import  ChatCard from "@/components/ChatCard";
+import ChatCard from "@/components/ChatCard";
 import ChatSidebar from "@/components/ChatSidebar";
-import { ChatSource }  from "@/composables/chat";
+import { ChatSource } from "@/composables/chat";
 import Loading from "@/components/Loading";
-
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +27,9 @@ export default function Home() {
             className="h-full"
           >
             <ChatSource>
-              <div className="grid grid-rows-[1fr_auto] min-h-[calc(100vh-5rem)]"> {/* Adjust 5rem to match navbar height */}
+              <div className="grid grid-rows-[1fr_auto] min-h-[calc(100vh-5rem)]">
+                {" "}
+                {/* Adjust 5rem to match navbar height */}
                 <ChatSidebar />
                 <div className="sticky bottom-0">
                   <ChatCard />

@@ -18,8 +18,10 @@ const ChatSidebar = () => {
 
   return (
     <section className="h-full flex flex-col flex-1">
-      <div className="flex-1 overflow-y-auto"
-      style={{ height: 'calc(100vh - 5rem)' }} >
+      <div
+        className="flex-1 overflow-y-auto"
+        style={{ height: "calc(100vh - 5rem)" }}
+      >
         <div className="space-y-8 p-4 md:p-8 ">
           {state.messages.map((msg) => (
             <TextBounce

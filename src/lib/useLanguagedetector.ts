@@ -55,9 +55,7 @@ export function useLanguageDetection() {
         detector = await self.ai.languageDetector.create();
       } else {
         // OPTIMALLY MONITOR MODEL DOWNLOAD, IF IT NEEDED
-        detector = await self.ai.languageDetector
-          .create
-          ();
+        detector = await self.ai.languageDetector.create();
         await detector.ready;
       }
 
