@@ -121,11 +121,11 @@ function ChatBox() {
   }
 
   return (
-    <div className="sticky bottom-0 left-0 right-0 bg-[#F4F4F4] pt-4">
+    <div className="sticky bottom-0 left-0 right-0  pt-4">
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full h-full  rounded-3xl border-t-0 bg-[#F4F4F4] shadow-custom"
+        className="w-full h-full  rounded-2xl border-t-0 bg-sidebar shadow-custom"
               >
         {/* Chat Box */}
         <FormField
@@ -135,7 +135,7 @@ function ChatBox() {
             <FormItem className="space-y-0">
               <FormControl>
                 <Textarea
-                  placeholder="What do you want to do?"
+                  placeholder="Type your text here and see the magic"
                   className="resize-none"
                   {...field}
                   onKeyDown={(e) => {

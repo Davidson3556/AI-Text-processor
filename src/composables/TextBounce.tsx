@@ -33,8 +33,8 @@ const TextBounce: React.FC<TextBounceProps> = ({
 
       <motion.div
         className={cn(
-          "flex flex-col gap-1 rounded-2xl border bg-white p-3",
-          right && "border-accent bg-[#F4F4F4] pr-3 text-[black]",
+          "flex flex-col gap-1 rounded-2xl border bg-background p-3",
+          right && "border-accent bg-sidebar pr-3 ",
         )}
         initial={{ boxShadow: "0 0 0px rgba(99, 102, 241, 0)" }}
         animate={{ 
@@ -56,8 +56,8 @@ const TextBounce: React.FC<TextBounceProps> = ({
         {/* Chat Timestamp */}
         <span
           className={cn(
-            "ml-auto flex items-center gap-2 pr-1.5 text-xs font-medium text-foreground-op",
-            right && "text-accent/50",
+            "ml-auto flex items-center gap-2 pr-1.5 text-xs font-medium ",
+            right && "",
           )}
         >
           {formatTime(timestamp)}{" "}

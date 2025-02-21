@@ -4,11 +4,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "@/components/Navbar";
 import  SidebarContent  from "@/components/SidebarContent";
 import { SidebarProvider } from "@/composables/sidebar";
-
+import { ThemeProvider } from "next-themes";
 
 
 import "./globals.css";
-import { HomeIcon } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,6 +56,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <SidebarProvider>
           <div className="flex h-full">
             <SidebarContent />
@@ -69,6 +69,7 @@ export default function RootLayout({
           </div>
           <Toaster />
         </SidebarProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

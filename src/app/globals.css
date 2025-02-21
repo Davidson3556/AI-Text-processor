@@ -33,10 +33,12 @@
     --ring: 222.2 84% 4.9%;
  
     --radius: 0.5rem;
+
+    --sidebar-background: 244 244 244;
   }
  
   .dark {
-    --background: 224 71% 4%;
+    --background: 214, 25%, 11%;
     --foreground: 213 31% 91%;
     
     --muted: 223 47% 11%;
@@ -50,6 +52,8 @@
     
     --card: 224 71% 4%;
     --card-foreground: 213 31% 91%;
+
+    --sidebar-background: 0 0% 4%;
   }
 }
  
@@ -69,6 +73,11 @@ html, body, #__next {
   margin: 0;
   padding: 0;
 }
+
+.bg-sidebar {
+  background-color: rgb(var(--sidebar-background));
+}
+
 .shadow-custom {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
               0 2px 4px -1px rgba(0, 0, 0, 0.06);

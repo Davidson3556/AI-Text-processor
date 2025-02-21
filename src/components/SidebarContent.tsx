@@ -34,7 +34,7 @@ const SidebarContent = () => {
           exit={{ x: -300 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className={cn(
-            "fixed md:relative h-screen bg-[#F4F4F4] border-r z-50", // Changed to h-screen
+            "fixed md:relative h-screen bg-sidebar border-r z-50", // Changed to h-screen
             "w-64 px-4 py-6",
             "md:translate-x-0 md:shadow-none"
           )}
