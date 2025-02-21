@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { SendHorizontal } from "lucide-react";
+import { SendHorizontal, Mic, MicOff } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -31,12 +31,23 @@ import { type FormData, FormSchema } from "@/utils/chatbox";
 import { languages } from "@/constants/allLanguage";
 import { cn } from "@/lib/utils";
 
-function ChatBox() {
-  // To hold the desired action ("translate" or "summarize")
-  const actionRef = useRef<"translate" | "summarize">("translate");
+declare global {
+  interface Window {
+    webkitSpeechRecognition: any;
+  }
+}
 
+interface SpeechRecognitionEvent extends Event {
+  results: SpeechRecognitionResultList;
+}
+
+function ChatBox() {
+  const actionRef = useRef<"translate" | "summarize">("translate");
   const { handleTranslator } = useTranslator();
   const { handleSummary } = useSummary();
+  const [isListening, setIsListening] = useState(false);
+  const recognition = useRef<any>(null);
+  const [browserSupport, setBrowserSupport] = useState(true);
 
   const form = useForm<FormData>({
     resolver: zodResolver(FormSchema),
@@ -53,6 +64,33 @@ function ChatBox() {
 
   const chatValue = watch("chat");
   const tooLong = chatValue.length > 150;
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      
+      if (SpeechRecognition) {
+        recognition.current = new SpeechRecognition();
+        recognition.current.continuous = true;
+        recognition.current.interimResults = true;
+
+        recognition.current.onresult = (event: SpeechRecognitionEvent) => {
+          const transcript = Array.from(event.results)
+            .map(result => result[0])
+            .map(result => result.transcript)
+            .join('');
+          
+          form.setValue('chat', transcript);
+        };
+
+        recognition.current.onerror = () => {
+          setIsListening(false);
+        };
+      } else {
+        setBrowserSupport(false);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const detectChatLanguage = async () => {
@@ -72,50 +110,73 @@ function ChatBox() {
     return () => clearTimeout(timer);
   }, [chatValue, detectLanguage]);
 
+  const toggleMicrophone = () => {
+    if (isListening) {
+      recognition.current?.stop();
+    } else {
+      recognition.current?.start();
+    }
+    setIsListening(!isListening);
+  };
+
   const notEnglish = detectedLanguage !== "en";
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    // Reset the form.
     form.reset({ chat: "", language: data.language });
 
     if (actionRef.current === "translate") {
-      // TRANSLATOR
       await handleTranslator(data);
     } else if (actionRef.current === "summarize") {
-      // SUMMARIZATION FLOW:
       await handleSummary(data);
     }
   }
 
   return (
-    <div className="sticky bottom-0 left-0 right-0  pt-4">
-      <Form {...form}>
+    <Form {...form}>
+      <div className="w-full bg-sidebar pt-4 shadow-t border-t">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full h-full  rounded-2xl border-t-0 bg-sidebar shadow-custom"
+          className="mx-auto w-full max-w-4xl rounded-t-3xl bg-sidebar px-4 pb-4"
         >
-          {/* Chat Box */}
           <FormField
             control={form.control}
             name="chat"
             render={({ field, fieldState }) => (
               <FormItem className="space-y-0">
                 <FormControl>
-                  <Textarea
-                    placeholder="Type your text here and see the magic"
-                    className="resize-none"
-                    {...field}
-                    onKeyDown={(e) => {
-                      if (
-                        window.innerWidth >= 640 &&
-                        e.key === "Enter" &&
-                        !e.shiftKey
-                      ) {
-                        e.preventDefault();
-                        form.handleSubmit(onSubmit)();
-                      }
-                    }}
-                  />
+                  <div className="relative">
+                    <Textarea
+                      placeholder="What do you want to do?"
+                      className="resize-none bg-background pr-12"
+                      {...field}
+                      onKeyDown={(e) => {
+                        if (
+                          window.innerWidth >= 640 &&
+                          e.key === "Enter" &&
+                          !e.shiftKey
+                        ) {
+                          e.preventDefault();
+                          form.handleSubmit(onSubmit)();
+                        }
+                      }}
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={toggleMicrophone}
+                      className="absolute right-2 top-2 rounded-full"
+                      disabled={!browserSupport}
+                      data-microphone-tooltip
+                      aria-label={isListening ? "Stop recording" : "Start recording"}
+                    >
+                      {isListening ? (
+                        <Mic className="h-5 w-5 text-red-500 animate-pulse" />
+                      ) : (
+                        <MicOff className="h-5 w-5 text-muted-foreground" />
+                      )}
+                    </Button>
+                  </div>
                 </FormControl>
 
                 <AnimatePresence mode="wait">
@@ -136,7 +197,6 @@ function ChatBox() {
           />
 
           <div className="flex w-full items-start justify-between gap-4 px-4 py-3 max-md:flex-col">
-            {/* Summarize button */}
             <div className="flex w-full flex-col justify-end">
               <Button
                 type="button"
@@ -146,23 +206,26 @@ function ChatBox() {
                   form.handleSubmit(onSubmit)();
                 }}
                 className={cn(
-                  "w-full bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 font-bold transition-all duration-300 md:w-fit",
-                  tooLong
-                    ? "animate-gradient"
-                    : "bg-clip-text text-transparent",
+                  "w-full bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 font-bold",
+                  "transition-all duration-300 md:w-fit",
+                  "dark:from-blue-600 dark:via-teal-500 dark:to-green-600",
+                  tooLong ? "animate-gradient" : "bg-clip-text text-transparent"
                 )}
               >
                 Summarize ✨
               </Button>
-
               {notEnglish && tooLong && (
                 <FormMessage className="h-fit px-2 pt-3 max-md:col-span-2 max-md:text-center">
                   Only English text can be summarized.
                 </FormMessage>
               )}
+              {!browserSupport && (
+                <FormMessage className="pt-2">
+                  Speech recognition is not supported in your browser
+                </FormMessage>
+              )}
             </div>
 
-            {/* Translation language options */}
             <FormField
               control={form.control}
               name="language"
@@ -193,7 +256,6 @@ function ChatBox() {
               )}
             />
 
-            {/* Translate button */}
             <Button
               type="submit"
               disabled={isSubmitting}
@@ -203,12 +265,12 @@ function ChatBox() {
               }}
             >
               Translate
-              <SendHorizontal />
+              <SendHorizontal className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </form>
-      </Form>
-    </div>
+      </div>
+    </Form>
   );
 }
 
